@@ -5,6 +5,9 @@ const { Client, LocalAuth, MessageMedia } = require('whatsapp-web.js');
 const client = new Client({
     authStrategy : new LocalAuth()
 });
+const browser = await PUPPETEER.launch({
+	ignoreDefaultArgs: ["--disable-extensions"]
+ })
 
 client.on('qr', qr => {
     qrcode.generate(qr, {small: true});
@@ -66,6 +69,9 @@ client.on('message', message => {
 	}
 	if(message.body === 'Farhan') {
 		message.reply('cute hai');
+	}
+	if(message.body === 'Farzina') {
+		message.reply('Topperon ki Topper');
 	}
 });
 
