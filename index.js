@@ -5,12 +5,6 @@ const { Client, LocalAuth, MessageMedia } = require('whatsapp-web.js');
 const client = new Client({
     authStrategy : new LocalAuth()
 });
-const ram = async () =>{
-const browser = await puppeteer.launch({
-	ignoreDefaultArgs: ["--disable-extensions"]
- })
-}
-ram();
 
 client.on('qr', qr => {
     qrcode.generate(qr, {small: true});
