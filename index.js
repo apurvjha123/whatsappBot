@@ -2,7 +2,11 @@ const qrcode = require('qrcode-terminal');
 const axios = require('axios')
 
 const { Client, MessageMedia } = require('whatsapp-web.js');
-const client = new Client();
+const client = new Client({
+	puppeteer: {
+		args: ['--no-sandbox'],
+	}
+});
 
 client.on('qr', qr => {
     qrcode.generate(qr, {small: true});
@@ -14,12 +18,12 @@ client.on('ready', () => {
 
 client.on('message',async message => {
     const content = message.body
-	if(content === 'meme plz') {
+	if(content === 'Meme plz') {
 		const meme = await axios('https://meme-api.herokuapp.com/gimme')
         .then(res => res.data.url)
         client.sendMessage(message.from, await MessageMedia.fromUrl(meme))
 	}
-    else if(content === 'joke plz') {
+    else if(content === 'Joke plz') {
 		const joke = await axios('https://v2.jokeapi.dev/joke/Any?safe-mode')
         .then(res => res.data)
 
@@ -35,15 +39,12 @@ client.on('message', message => {
 });
 client.on('message', message => {
 	if(message.body === 'Harsh') {
-		message.reply('Singer ka Bestfriend hai');
+		message.reply('Handsome boy');
 	}
 });
 
 
 client.on('message', message => {
-	if(message.body === 'Apurv') {
-		message.reply('Choder hai');
-	}
 	if(message.body === 'Lissan') {
 		message.reply('Do you mean Lassan');
 	}
@@ -51,7 +52,7 @@ client.on('message', message => {
 		message.reply('Usko kuch mat bolo gali de dega');
 	}
 	if(message.body === 'Arun') {
-		message.reply('Chutiya hai');
+		message.reply('Chu*ya hai');
 	}
 	if(message.body === 'Prince') {
 		message.reply('simp hai');
@@ -67,6 +68,9 @@ client.on('message', message => {
 	}
 	if(message.body === 'Farzina') {
 		message.reply('Topperon ki Topper');
+	}
+	if(message.body === 'Zain') {
+		message.reply('Scout ka baap');
 	}
 });
 
